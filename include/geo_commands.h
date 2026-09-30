@@ -149,18 +149,21 @@ enum GeoLayoutCommands {
 
 /**
  * 0x0A: Create camera frustum scene graph node
- *   0x01: u8  if nonzero, enable function field
+ *   0x01: u8 flags: bit 0 = function present, bit 1 = 32-bit far
  *   0x02: s16 field of view
  *   0x04: u16 near
- *   0x06: u16 far
- *   0x08: [GraphNodeFunc function]
+ *   0x06: u16 reserved (legacy format: far)
+ *   0x08: u32 far (extended format only)
+ *   0x0C: [GraphNodeFunc function] (legacy format: 0x08)
 */
 #define GEO_CAMERA_FRUSTUM(fov, near, far) \
-    CMD_BBH(GEO_CMD_NODE_PERSPECTIVE, 0x00, fov), \
-    CMD_HH(near, far)
+    CMD_BBH(GEO_CMD_NODE_PERSPECTIVE, 0x02, fov), \
+    CMD_HH(near, 0), \
+    CMD_W(far)
 #define GEO_CAMERA_FRUSTUM_WITH_FUNC(fov, near, far, func) \
-    CMD_BBH(GEO_CMD_NODE_PERSPECTIVE, 0x01, fov), \
-    CMD_HH(near, far), \
+    CMD_BBH(GEO_CMD_NODE_PERSPECTIVE, 0x03, fov), \
+    CMD_HH(near, 0), \
+    CMD_W(far), \
     CMD_PTR(func)
 
 /**

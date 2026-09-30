@@ -244,30 +244,42 @@ void geo_layout_cmd_node_ortho_projection(void) {
 
 /*
   0x0A: Create camera frustum scene graph node
-   cmd+0x01: u8  if nonzero, enable frustumFunc field
+   cmd+0x01: u8 flags: bit 0 = function present, bit 1 = 32-bit far
    cmd+0x02: s16 field of view
    cmd+0x04: u16 near
-   cmd+0x06: u16 far
-   [cmd+0x08: GraphNodeFunc frustumFunc]
+   cmd+0x06: u16 reserved (legacy format: far)
+   cmd+0x08: u32 far (extended format only)
+   [cmd+0x0C: GraphNodeFunc frustumFunc] (legacy format: 0x08)
 */
 void geo_layout_cmd_node_perspective(void) {
     struct GraphNodePerspective *graphNode;
     GraphNodeFunc frustumFunc = NULL;
+    u8 flags = cur_geo_cmd_u8(0x01);
     s16 fov = cur_geo_cmd_s16(0x02);
     u16 near = cur_geo_cmd_u16(0x04);
-    u16 far = cur_geo_cmd_u16(0x06);
+    u32 far;
+    u32 commandSize;
 
-    if (cur_geo_cmd_u8(0x01) != 0) {
-        // optional asm function
-        frustumFunc = (GraphNodeFunc) cur_geo_cmd_ptr(0x08);
-        gGeoLayoutCommand += 4 << CMD_SIZE_SHIFT;
+    if (flags & 0x02) {
+        far = cur_geo_cmd_u32(0x08);
+        commandSize = 0x0C;
+    } else {
+        // Keep support for the original 16-bit command format.
+        far = cur_geo_cmd_u16(0x06);
+        commandSize = 0x08;
+    }
+
+    if (flags & 0x01) {
+        // The callback follows the clipping distances in either format.
+        frustumFunc = (GraphNodeFunc) cur_geo_cmd_ptr(commandSize);
+        commandSize += 0x04;
     }
 
     graphNode = init_graph_node_perspective(gGraphNodePool, NULL, (f32) fov, near, far, frustumFunc);
 
     register_scene_graph_node(&graphNode->fnNode.node);
 
-    gGeoLayoutCommand += 0x08 << CMD_SIZE_SHIFT;
+    gGeoLayoutCommand += commandSize << CMD_SIZE_SHIFT;
 }
 
 /*
