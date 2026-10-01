@@ -24,3 +24,4 @@
 #include "levels/ssl/pyramid_elevator/geo.inc.c"
 #include "levels/ssl/areas/2/geo.inc.c"
 #include "levels/ssl/areas/3/geo.inc.c"
+#include "geo.inc.c"

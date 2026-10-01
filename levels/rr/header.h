@@ -110,4 +110,5 @@ extern const Trajectory rr_seg7_trajectory_0702EEE0[];
 // script
 extern const LevelScript level_rr_entry[];
 
+#include "header.inc.h"
 #endif

@@ -1,0 +1,11 @@
+extern const GeoLayout jrb_area_1_geo[];
+extern const GeoLayout jrb_area_1[];
+extern const Collision jrb_area_1_collision[];
+extern const MacroObject jrb_area_1_macro_objs[];
+extern u8 jrb_dl_cs_lawn03_alb_ci8[];
+extern u8 jrb_dl_cs_lawn03_alb_pal_rgba16[];
+extern Vtx jrb_dl_Plane_mesh_layer_1_vtx_0[537];
+extern Gfx jrb_dl_Plane_mesh_layer_1_tri_0[];
+extern Gfx mat_jrb_dl_f3dlite_material_002[];
+extern Gfx mat_revert_jrb_dl_f3dlite_material_002[];
+extern Gfx jrb_dl_Plane_mesh_layer_1_with_revert[];

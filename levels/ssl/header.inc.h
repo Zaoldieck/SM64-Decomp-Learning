@@ -1,0 +1,11 @@
+extern const GeoLayout ssl_area_1_geo[];
+extern const GeoLayout ssl_area_1[];
+extern const Collision ssl_area_1_collision[];
+extern const MacroObject ssl_area_1_macro_objs[];
+extern u8 ssl_dl_cs_lawn03_alb_ci8[];
+extern u8 ssl_dl_cs_lawn03_alb_pal_rgba16[];
+extern Vtx ssl_dl_Plane_mesh_layer_1_vtx_0[537];
+extern Gfx ssl_dl_Plane_mesh_layer_1_tri_0[];
+extern Gfx mat_ssl_dl_f3dlite_material_002[];
+extern Gfx mat_revert_ssl_dl_f3dlite_material_002[];
+extern Gfx ssl_dl_Plane_mesh_layer_1_with_revert[];

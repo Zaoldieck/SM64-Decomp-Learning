@@ -94,4 +94,5 @@ extern const Gfx bitfs_dl_lava_floor[];
 // script
 extern const LevelScript level_bitfs_entry[];
 
+#include "header.inc.h"
 #endif
