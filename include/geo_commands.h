@@ -153,7 +153,7 @@ enum GeoLayoutCommands {
  *   0x02: s16 field of view
  *   0x04: u16 near
  *   0x06: u16 reserved (legacy format: far)
- *   0x08: u32 far (extended format only)
+ *   0x08: u32 far (32-bit far format only)
  *   0x0C: [GraphNodeFunc function] (legacy format: 0x08)
 */
 #define GEO_CAMERA_FRUSTUM(fov, near, far) \

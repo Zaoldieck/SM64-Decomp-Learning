@@ -247,9 +247,9 @@ void geo_layout_cmd_node_ortho_projection(void) {
    cmd+0x01: u8 flags: bit 0 = function present, bit 1 = 32-bit far
    cmd+0x02: s16 field of view
    cmd+0x04: u16 near
-   cmd+0x06: u16 reserved (legacy format: far)
-   cmd+0x08: u32 far (extended format only)
-   [cmd+0x0C: GraphNodeFunc frustumFunc] (legacy format: 0x08)
+   cmd+0x06: u16 reserved (original format: far)
+   cmd+0x08: u32 far (32-bit far format only)
+   [cmd+0x0C: GraphNodeFunc frustumFunc] (original format: 0x08)
 */
 void geo_layout_cmd_node_perspective(void) {
     struct GraphNodePerspective *graphNode;
